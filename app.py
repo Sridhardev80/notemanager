@@ -2,10 +2,17 @@ from flask import Flask,render_template,request,redirect
 from flask_moment import Moment
 import pymongo
 import datetime
+import os
 app=Flask(__name__)
-file=open('connectionstring.txt','r')
-connectionstring=file.read().strip()
-file.close()
+# print('HELLO')
+# print(os.environ.get('ENVIRONMENT'))
+# print('HELLO')
+if os.environ.get('ENVIRONMENT')==None:
+    file=open('connectionstring.txt','r')
+    connectionstring=file.read().strip()
+    file.close()
+else:
+    connectionstring=os.environ.get('ENVIRONMENT')
 app.config["MONGO_URI"]=pymongo.MongoClient(connectionstring)
 database=app.config["MONGO_URI"]["Note_Manager"]
 collection=database["Notes"]
