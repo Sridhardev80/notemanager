@@ -12,7 +12,7 @@ if os.environ.get('ENVIRONMENT')==None:
     connectionstring=file.read().strip()
     file.close()
 else:
-    connectionstring=os.environ.get('ENVIRONMENT')
+    connectionstring=os.environ.get('MONGO_URI')
 app.config["MONGO_URI"]=pymongo.MongoClient(connectionstring)
 database=app.config["MONGO_URI"]["Note_Manager"]
 collection=database["Notes"]
